@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', ()=> {
 })
 
 function popularDropDown (){
+    while (selectorLibros.firstChild) {
+        selectorLibros.removeChild(selectorLibros.firstChild);
+    }
     Libros.forEach((libro) => {
         const option = document.createElement('option')
         option.textContent = `${libro.nombre} : ${libro.precio}`;
@@ -41,6 +44,7 @@ botonAgregar.addEventListener('click', (evento) => {
         alert('El libro ' + inputLibro.value + ' fue agregado correctamente');
         limpiarFormulario(formRegistro);
         localStorage.setItem ('Libreria', JSON.stringify(Libros))
+        popularDropDown()
     } else {
         alert('No se pudo cargar el libro, alguno de los valores son incorrectos')
     }
@@ -83,36 +87,4 @@ function BuscarLibro() {
 }
 
 
-
-
-//// abajo una prueba de buscar libros 
-
-// function BuscarLibro() {
-//     const busqueda = inputLibro.value.toLowerCase();
-//     const busquedaAutor = inputAutor.value.toLowerCase();
-//     const busquedaGenero = inputGenero.value.toLowerCase();
-//     const busquedaEditorial = inputEditorial.value.toLowerCase();
-  
-//     const librosEncontrados = Libros.filter(libro => {
-//       return (
-//         libro.nombre.toLowerCase().includes(busqueda) ||
-//         libro.autor.toLowerCase().includes(busquedaAutor) ||
-//         libro.genero.toLowerCase().includes(busquedaGenero) ||
-//         libro.editorial.toLowerCase().includes(busquedaEditorial)
-//       );
-//     });
-  
-//     if (librosEncontrados.length > 0) {
-//       let mensaje = 'Libros encontrados:\n\n';
-//       librosEncontrados.forEach(libro => {
-//         mensaje += `Nombre: ${libro.nombre}\nAutor: ${libro.autor}\nStock: ${libro.stock}\nPrecio: $${libro.precio}\n\n`;
-//       });
-//       alert(mensaje);
-//       limpiarFormulario(formRegistro);
-//     } else {
-//       alert('No se encontraron libros que coincidan con la búsqueda');
-//       limpiarFormulario(formRegistro);
-//     }
-//   }
-  
 
